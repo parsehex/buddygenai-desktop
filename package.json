@@ -12,7 +12,7 @@
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "build:webapp": "cd ../BuddyGenAI && npm ci && cross-env IS_ELECTRON=true npm run build && cd ../buddygenai-desktop && rm -rf out/renderer && cp -r ../BuddyGenAI/.output/public ./out/renderer",
-    "dev:webapp": "rm -rf ./out/renderer && cd ../BuddyGenAI && npm run dev",
+    "dev:webapp": "rm -rf ./out/renderer && cd ../BuddyGenAI && cross-env VITE_IS_ELECTRON=true npm run dev",
     "dev": "concurrently \"npm run dev:webapp\" \"wait-on http://localhost:3000 && cross-env ELECTRON_RENDERER_URL=http://localhost:3000 electron .\"",
     "start": "electron-vite preview",
     "build": "npm run build:webapp && npm run typecheck && electron-vite build",
